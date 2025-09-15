@@ -6,6 +6,7 @@ if (navigator.geolocation) {
     (position) => {
       const { latitude, longitude } = position.coords;
       socket.emit("send_location", { username, latitude, longitude });
+      map.setView([latitude, longitude], 18);
     },
     (err) => {
       console.error(err);
@@ -67,5 +68,6 @@ function addOrUpdateMarker(user) {
     markers[id] = L.marker([latitude, longitude], { icon: customIcon }).addTo(
       map
     );
+    map.setView([latitude, longitude], 18);
   }
 }
